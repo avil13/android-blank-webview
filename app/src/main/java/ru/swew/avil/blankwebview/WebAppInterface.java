@@ -9,9 +9,6 @@ import android.webkit.JavascriptInterface;
 
 import java.io.IOException;
 
-/**
- * Created by avil on 21.09.17.
- */
 
 public class WebAppInterface {
     Context context;
@@ -57,6 +54,5 @@ public class WebAppInterface {
         String message = preferences.getString(key, "");
         return message;
     }
-
 
 }
