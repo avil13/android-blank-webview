@@ -18,6 +18,32 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
+    @Override
+    public void onBackPressed() {
+        vw.loadUrl("javascript: windowClose();");
+        MainActivity.this.finish();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        vw.loadUrl("javascript: windowClose();");
+        MainActivity.this.finish();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        vw.loadUrl("javascript: windowOpen();");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        vw.loadUrl("javascript: windowClose();");
+        MainActivity.this.finish();
+    }
+
 
     @SuppressLint("JavascriptInterface")
     private void init() {
