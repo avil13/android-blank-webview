@@ -3,8 +3,9 @@ package ru.swew.avil.blankwebview;
 import android.annotation.SuppressLint;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -46,6 +47,17 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.this.finish();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (vw.canGoBack()) {
+                vw.goBack();
+                return true;
+            }
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
 
     @SuppressLint("JavascriptInterface")
     private void init() {
@@ -71,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         vw.setWebViewClient(new WebViewClient());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (0 != (getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE)){
+            if (0 != (getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE)) {
                 vw.setWebContentsDebuggingEnabled(true);
             }
         }
